@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marlène Tissot Desvaux de Marigny</title>
+<style>
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ── VARIABLES ── */
+:root{
+  --bg:#F8F6F1;
+  --ink:#1A1814;
+  --muted:#6E6A62;
+  --accent:#C8502A;
+  --accent2:#1D5F80;
+  --line:#DDD9D0;
+  --tag-bg:#EEEAE3;
+  --tag-text:#4A4640;
+  --tag-red-bg:#FAECE7;
+  --tag-red:#8B3318;
+  --tag-blue-bg:#E2EEF5;
+  --tag-blue:#1A4F6A;
+  --serif:'Georgia',serif;
+  --mono:'Courier New',monospace;
+  --sans:'Helvetica Neue',Arial,sans-serif;
+}
+
+/* ── BASE ── */
+html{font-size:15px;scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:400;
+  line-height:1.65;
+  min-height:100vh;
+}
+
+/* ── WRAPPER ── */
+.page{max-width:800px;margin:0 auto;padding:2.5rem 2rem 5rem}
+
+/* ── LANG SWITCHER ── */
+.lang-bar{
+  display:flex;
+  justify-content:flex-end;
+  gap:.5rem;
+  margin-bottom:2rem;
+}
+.lang-btn{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  padding:.3rem .9rem;
+  border:1px solid var(--line);
+  background:transparent;
+  color:var(--muted);
+  cursor:pointer;
+  border-radius:2px;
+  transition:all .2s;
+}
+.lang-btn.active{
+  background:var(--ink);
+  color:var(--bg);
+  border-color:var(--ink);
+}
+.lang-btn:hover:not(.active){
+  border-color:var(--accent);
+  color:var(--accent);
+}
+
+/* ── HEADER ── */
+.cv-header{
+  padding-bottom:1.6rem;
+  border-bottom:2px solid var(--ink);
+  margin-bottom:0;
+}
+.cv-eyebrow{
+  font-family:var(--mono);
+  font-size:.68rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--accent2);
+  margin-bottom:.5rem;
+}
+.cv-name{
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(2rem,5vw,3rem);
+  line-height:1.1;
+  letter-spacing:-.01em;
+  margin-bottom:1.2rem;
+}
+.cv-name em{color:var(--accent);font-style:italic}
+.cv-contacts{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.3rem 1.4rem;
+  font-size:.8rem;
+  color:var(--muted);
+}
+.cv-contacts a{color:var(--muted);text-decoration:none}
+.cv-contacts a:hover{color:var(--accent)}
+
+/* ── SECTIONS ── */
+.cv-section{margin-top:1.8rem}
+.cv-section-title{
+  font-family:var(--mono);
+  font-size:.66rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--accent);
+  border-bottom:1px solid var(--line);
+  padding-bottom:.3rem;
+  margin-bottom:1rem;
+}
+
+/* ── PROFIL ── */
+.cv-profil-text{
+  font-family:var(--serif);
+  font-size:1rem;
+  line-height:1.75;
+  color:#2E2A25;
+  margin-bottom:.9rem;
+}
+.tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.7rem}
+.tag{
+  font-family:var(--mono);
+  font-size:.64rem;
+  letter-spacing:.05em;
+  padding:.2rem .65rem;
+  border-radius:2px;
+  background:var(--tag-bg);
+  color:var(--tag-text);
+}
+.tag.r{background:var(--tag-red-bg);color:var(--tag-red)}
+.tag.b{background:var(--tag-blue-bg);color:var(--tag-blue)}
+
+/* ── JOBS ── */
+.job{padding:1.4rem 0;border-bottom:1px solid var(--line)}
+.job:last-child{border-bottom:none}
+.job-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:1rem;
+  margin-bottom:.2rem;
+}
+.job-title{
+  font-family:var(--serif);
+  font-size:1.05rem;
+  font-weight:700;
+  line-height:1.2;
+  color:var(--ink);
+}
+.job-company{
+  font-family:var(--mono);
+  font-size:.7rem;
+  color:var(--accent);
+  letter-spacing:.06em;
+  margin-top:.15rem;
+}
+.job-dates{
+  font-family:var(--mono);
+  font-size:.65rem;
+  color:var(--muted);
+  white-space:nowrap;
+  text-align:right;
+  line-height:1.5;
+  flex-shrink:0;
+}
+.job-context{
+  font-size:.79rem;
+  color:var(--muted);
+  font-style:italic;
+  margin:.2rem 0 .6rem;
+}
+.job-bullets{list-style:none;padding:0}
+.job-bullets li{
+  font-size:.855rem;
+  padding-left:1rem;
+  position:relative;
+  margin-bottom:.32rem;
+  color:#2A2620;
+  line-height:1.55;
+}
+.job-bullets li::before{
+  content:'–';
+  position:absolute;
+  left:0;
+  color:var(--accent);
+}
+.job-bullets li strong{font-weight:600;color:var(--ink)}
+
+/* ── SKILLS GRID ── */
+.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem 2rem}
+.skill-group-title{
+  font-family:var(--mono);
+  font-size:.62rem;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:.25rem;
+}
+.skill-group p{font-size:.8rem;line-height:1.6;color:#2A2620}
+.skill-group.full{grid-column:1/-1}
+
+/* ── TOOLS ── */
+.tools-flow{display:flex;flex-wrap:wrap;gap:.3rem}
+
+/* ── LANG BARS ── */
+.lang-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem 1rem}
+.lang-name{font-weight:600;font-size:.84rem}
+.lang-level{font-family:var(--mono);font-size:.63rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.lang-bar{height:2px;background:var(--line);margin-top:.3rem}
+.lang-fill{height:100%;background:var(--accent)}
+
+/* ── FORMATION ── */
+.edu-degree{font-weight:600;font-size:.88rem}
+.edu-school{font-family:var(--mono);font-size:.68rem;color:var(--accent);letter-spacing:.05em;margin-top:.1rem}
+.edu-detail{font-size:.78rem;color:var(--muted);margin-top:.12rem}
+
+/* ── ENGAGEMENTS ── */
+.engage-list{list-style:none;padding:0}
+.engage-list li{
+  font-size:.855rem;
+  padding-left:1rem;
+  position:relative;
+  margin-bottom:.3rem;
+  color:#2A2620;
+  line-height:1.55;
+}
+.engage-list li::before{content:'–';position:absolute;left:0;color:var(--accent2)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:580px){
+  .page{padding:1.5rem 1.1rem 4rem}
+  .job-top{flex-direction:column;gap:.15rem}
+  .job-dates{text-align:left}
+  .skills-grid{grid-template-columns:1fr}
+  .skill-group.full{grid-column:1}
+  .lang-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ── LANG VISIBILITY ── */
+.fr-content,.en-content{display:none}
+.fr-content.active,.en-content.active{display:block}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- LANG SWITCHER -->
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('fr')" id="btn-fr">FR</button>
+  <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+</div>
+
+<!-- ════════════════════════════════════════
+     VERSION FRANÇAISE
+════════════════════════════════════════ -->
+<div class="fr-content active">
+
+<header class="cv-header">
+  <p class="cv-eyebrow">Directrice Commerciale &amp; Marketing — B2B · Tech · International</p>
+  <h1 class="cv-name">Marlène Tissot <em>Desvaux de Marigny</em></h1>
+  <div class="cv-contacts">
+    <span>Grenoble, France</span>
+    <a href="mailto:marlene.tissot.marigny@email.com">marlene.tissot.marigny@email.com</a>
+    <a href="tel:+33775719453">+33 7 75 71 94 53</a>
+    <a href="https://www.linkedin.com/in/marlenedesvauxdemarigny/" target="_blank">LinkedIn</a>
+  </div>
+</header>
+
+<section class="cv-section">
+  <h2 class="cv-section-title">Profil</h2>
+  <p class="cv-profil-text">Directrice Commerciale &amp; Marketing avec 20+ ans d'expérience en développement commercial, stratégie GTM et croissance du chiffre d'affaires dans des environnements B2B internationaux (tech, deep tech, télécoms, e-mobility). Capacité prouvée à piloter des plans d'actions commerciales de bout en bout — segmentation marché, qualification des cibles, activation des équipes vente, conquête de nouveaux clients. Expérience directe de création et gestion d'entreprise (P&amp;L, recrutement, développement de portefeuille clients). Profil « builder augmenté IA » : prototypage et déploiement d'applications métier (vibe coding, GitHub, Vercel, Supabase), maîtrise des outils d'IA générative et du référencement génératif (GEO). Trilingue opérationnelle (FR / EN / SV), forte adaptabilité sectorielle, ancrage Grenoble.</p>
+  <div class="tags">
+    <span class="tag r">Développement commercial</span>
+    <span class="tag r">Plan d'actions commerciales (PAC)</span>
+    <span class="tag r">Stratégie GTM</span>
+    <span class="tag r">Croissance du CA</span>
+    <span class="tag r">Grands comptes B2B</span>
+    <span class="tag r">Gestion de P&amp;L</span>
+    <span class="tag b">Management équipes (12 pers.)</span>
+    <span class="tag b">Salesforce · HubSpot · GA4</span>
+    <span class="tag b">Branding &amp; Positionnement</span>
+    <span class="tag b">IA générative &amp; GEO</span>
+    <span class="tag">Builder augmenté IA · Vibe coding</span>
+    <span class="tag">Esprit entrepreneur</span>
+    <span class="tag">Ancrage Grenoble Métropole</span>
+  </div>
+</section>
+
+<section class="cv-section">
+  <h2 class="cv-section-title">Expérience professionnelle</h2>
+
+  <div class="job">
+    <div class="job-top">
+      <div><div class="job-title">Directrice Marketing</div><div class="job-company">eBikeLabs</div></div>
+      <div class="job-dates">Grenoble, France<br>2025 – Juin 2026</div>
+    </div>
+    <p class="job-context">Scale-up deep tech — logiciel de contrôle moteur eBikeOS pour vélos électriques et flottes partagées. Membre du Comité de Direction.</p>
+    <ul class="job-bullets">
+      <li><strong>Plan d'actions commerciales (PAC) :</strong> élaboration et pilotage de la stratégie GTM avec alignement des équipes CEO, COO, technique et commerciale sur les objectifs de croissance et les cibles prioritaires (OEMs, fabricants de moteurs, opérateurs de flottes).</li>
+      <li><strong>Segmentation &amp; ciblage commercial :</strong> définition des ICPs et propositions de valeur différenciantes pour 3 segments clients ; création des outils d'aide à la vente et narratifs commerciaux pour activer les équipes terrain.</li>
+      <li><strong>Lancement produit &amp; pipeline :</strong> pilotage du lancement d'eBikeOS — campagne de financement participatif dépassant ses objectifs, acquisition de partenaires stratégiques (Voi, Fifteen, Sonceboz, Doga), croissance mesurable de la base clients.</li>
+      <li><strong>Positionnement de l'offre :</strong> rebranding complet de l'identité et du site corporate pour améliorer la lisibilité commerciale auprès des grands comptes industriels et accélérer la conversion.</li>
+      <li><strong>Notoriété &amp; génération de leads :</strong> stratégie de communication générant 30 retombées presse positives, croissance de l'engagement sur tous les canaux numériques.</li>
+      <li><strong>Management &amp; reporting :</strong> co-pilotage des priorités équipes techniques, commerciales et marketing ; membre du CoDir — arbitrages budgétaires et reporting à la direction générale.</li>
+    </ul>
+    <div class="tags" style="margin-top:.6rem">
+      <span class="tag r">PAC / GTM</span><span class="tag r">Sales Enablement</span><span class="tag r">Pipeline Generation</span><span class="tag r">Rebranding</span><span class="tag b">P&amp;L · Budget</span><span class="tag b">Management (12 pers.)</span>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="job-top">
+      <div><div class="job-title">Senior Brand &amp; Tech Strategist</div><div class="job-company">Seventy Agency</div></div>
+      <div class="job-dates">Stockholm, Suède<br>2022 – 2025</div>
+    </div>
+    <p class="job-context">Agence de brand &amp; business design pour leaders tech et industrie (portefeuille : Ericsson, Atlas Copco, Samsung, Nothing).</p>
+    <ul class="job-bullets">
+      <li><strong>Conseil C-level &amp; stratégie commerciale et de marque :</strong> accompagnement de la direction générale d'Ericsson sur la stratégie de capital de marque lors de fusions-acquisitions (M&amp;A) et du déploiement de fonctionnalités innovantes de réseaux 5G.</li>
+      <li><strong>Développement commercial :</strong> identification et structuration d'opportunités de positionnement commercial et marketing ; architecture de marque post-M&amp;A pour générer de nouveaux flux de revenus sur de nouvelles cibles.</li>
+      <li><strong>Gestion de compte &amp; performance :</strong> maintien et croissance du CA en contexte économique tendu ; gestion de budgets importants, management d'équipes projets (8 personnes).</li>
+      <li><strong>Représentation :</strong> démonstrations hybrides au Mobile World Congress avec fort taux de conversion prospects ; collaboration avec équipes internationales (USA, Suède).</li>
+    </ul>
+    <div class="tags" style="margin-top:.6rem">
+      <span class="tag r">Stratégie commerciale B2B</span><span class="tag r">Gestion grands comptes</span><span class="tag r">M&amp;A Integration</span><span class="tag b">Management (8 pers.)</span>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="job-top">
+      <div><div class="job-title">Fondatrice &amp; CEO</div><div class="job-company">Daring Exponentials AB</div></div>
+      <div class="job-dates">Stockholm, Suède<br>2019 – 2025</div>
+    </div>
+    <p class="job-context">Cabinet niche spécialisé dans l'inclusion des talents et la performance organisationnelle.</p>
+    <ul class="job-bullets">
+      <li><strong>Création &amp; développement d'entreprise :</strong> fondation et croissance d'une structure indépendante — prospection, acquisition clients, développement de l'offre, gestion complète du P&amp;L.</li>
+      <li><strong>Développement du portefeuille clients :</strong> constitution d'un réseau de clients et partenaires B2B ; conseil en design organisationnel et accompagnement de dirigeants.</li>
+      <li><strong>Leadership &amp; management :</strong> recrutement et pilotage d'une équipe spécialisée ; formation et accompagnement de professionnels.</li>
+    </ul>
+    <div class="tags" style="margin-top:.6rem">
+      <span class="tag r">Création d'entreprise</span><span class="tag r">Gestion de P&amp;L</span><span class="tag r">Développement portefeuille</span><span class="tag b">Leadership</span>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="job-top">
+      <div><div class="job-title">Opinion &amp; Feature Editor / Head of AI &amp; Data</div><div class="job-company">Realtid</div></div>
+      <div class="job-dates">Stockholm, Suède<br>Oct. 2021 – Juin 2022</div>
+    </div>
+    <p class="job-context">Média d'actualité économique et technologique.</p>
+    <ul class="job-bullets">
+      <li><strong>Transformation &amp; croissance des revenus :</strong> pilotage de la transition data-driven — modélisation des KPIs, automatisation du reporting, +20 % de revenus via un ciblage commercial affiné.</li>
+      <li><strong>Développement commercial :</strong> création de nouveaux formats éditoriaux (newsletters data-driven, rapports interactifs) pour générer des opportunités de sponsorship et revenus partenaires.</li>
+    </ul>
+    <div class="tags" style="margin-top:.6rem">
+      <span class="tag r">Croissance revenus +20%</span><span class="tag b">Pilotage par les données</span>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="job-top">
+      <div><div class="job-title">Digital Communications &amp; Content Manager</div><div class="job-company">Invest Stockholm</div></div>
+      <div class="job-dates">Stockholm, Suède<br>2017 – 2019</div>
+    </div>
+    <p class="job-context">Agence de promotion économique de Stockholm — tech, innovation, FoodTech, Life Science.</p>
+    <ul class="job-bullets">
+      <li><strong>Développement commercial international :</strong> prospection et acquisition d'investisseurs et startups ; campagnes de génération de leads multicanal.</li>
+      <li><strong>Événementiel B2B :</strong> organisation d'événements sold-out en Suède et aux USA (SXSW Austin, FoodTech New York).</li>
+      <li><strong>Pilotage agences &amp; partenariats :</strong> gestion d'agences externes ; coordination avec startups, incubateurs et institutions locales.</li>
+    </ul>
+    <div class="tags" style="margin-top:.6rem">
+      <span class="tag r">Lead Generation</span><span class="tag r">Développement commercial</span><span class="tag b">HubSpot · GA4</span>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="job-top">
+      <div><div class="job-title">CMO fractionné / Head of Growth / Editor</div><div class="job-company">Freelance — Multi-mandats</div></div>
+      <div class="job-dates">Suède · France · UK · USA<br>2002 – 2022</div>
+    </div>
+    <p class="job-context">Direction commerciale et marketing externalisée — clients : Vinci, eBikeLabs, GSMA, RCR Wireless, Sköna.</p>
+    <ul class="job-bullets">
+      <li><strong>Direction commerciale externalisée (CMO fractionné) :</strong> définition des plans de croissance, déploiement de stratégies GTM, création des outils commerciaux et génération de pipeline pour clients B2B.</li>
+      <li><strong>Campagnes de performance :</strong> stratégies data-driven (SEO, SEM, automation) orientées acquisition et conversion ; brand storytelling et demand generation.</li>
+      <li><strong>Veille &amp; analyse marché :</strong> études GTM, benchmark concurrentiel, identification de nouvelles opportunités sectorielles.</li>
+    </ul>
+    <div class="tags" style="margin-top:.6rem">
+      <span class="tag r">GTM Strategy</span><span class="tag r">Demand Generation</span><span class="tag r">CMO fractionné</span><span class="tag b">SEO / SEM · HubSpot · SEMrush</span>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="job-top">
+      <div><div class="job-title">Rédactrice en chef &amp; Cheffe de Produit</div><div class="job-company">Mobilbusiness / Mobil</div></div>
+      <div class="job-dates">Stockholm, Suède<br>2012 – 2015</div>
+    </div>
+    <p class="job-context">Médias spécialisés télécoms B2B &amp; B2C.</p>
+    <ul class="job-bullets">
+      <li><strong>Gestion d'un centre de profit :</strong> pilotage du P&amp;L, croissance des revenus annonceurs, diversification des sources de revenus, gestion budgétaire.</li>
+      <li><strong>Management :</strong> direction d'une équipe de 10 personnes (salariés et prestataires) ; stratégie multicanal, digitalisation des produits éditoriaux.</li>
+      <li><strong>Événementiel commercial :</strong> organisation d'événements sold-out générateurs de revenus partenaires.</li>
+    </ul>
+    <div class="tags" style="margin-top:.6rem">
+      <span class="tag r">P&amp;L management</span><span class="tag r">Croissance revenus</span><span class="tag b">Management (10 pers.)</span>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="job-top">
+      <div><div class="job-title">Senior Editor</div><div class="job-company">Telekom Online</div></div>
+      <div class="job-dates">Allemagne<br>2007 – 2011</div>
+    </div>
+    <p class="job-context">Média B2B télécoms &amp; tech, groupe Deutsche Telekom.</p>
+    <ul class="job-bullets">
+      <li>Analyse des marchés télécoms et tech en Europe ; production de contenus analytiques pour décideurs et dirigeants.</li>
+      <li>Collaboration avec les équipes commerciales pour des formats orientés croissance lectorat et revenus partenaires.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-top">
+      <div><div class="job-title">Senior Editor</div><div class="job-company">emap</div></div>
+      <div class="job-dates">Londres, Royaume-Uni<br>2001 – 2002</div>
+    </div>
+    <p class="job-context">Groupe média B2B spécialisé télécoms &amp; tech.</p>
+    <ul class="job-bullets">
+      <li>Analyse des marchés télécoms &amp; tech mondiaux ; benchmark concurrentiel ; contenu analytique orienté partenariats commerciaux.</li>
+      <li>Collaboration étroite avec les équipes ventes pour des formats à forte valeur ajoutée.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-top">
+      <div><div class="job-title">Associate Research Analyst</div><div class="job-company">Gartner</div></div>
+      <div class="job-dates">Royaume-Uni<br>1999 – 2001</div>
+    </div>
+    <p class="job-context">Cabinet de conseil et recherche — pratique télécommunications.</p>
+    <ul class="job-bullets">
+      <li>Analyses stratégiques de marché (télécoms, VoIP) pour orienter les recommandations commerciales des clients Gartner.</li>
+      <li>Veille technologique, benchmark concurrentiel, rapports publiés et présentations pour décideurs C-level.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-top">
+      <div><div class="job-title">Stagiaire Marketing &amp; Commerce International</div><div class="job-company">Federal Mogul</div></div>
+      <div class="job-dates">Royaume-Uni · Allemagne<br>1998 – 1999</div>
+    </div>
+    <p class="job-context">Fournisseur automobile international.</p>
+    <ul class="job-bullets">
+      <li>Immersion dans l'environnement marketing et commercial de l'industrie automobile en contexte international.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="cv-section">
+  <h2 class="cv-section-title">Compétences clés</h2>
+  <div class="skills-grid">
+    <div class="skill-group"><p class="skill-group-title">Stratégie &amp; commercial</p><p>Plan d'actions commerciales (PAC) · Stratégie GTM · Croissance du CA · Développement portefeuille clients · Prospection &amp; qualification leads · Gestion grands comptes B2B · Négociation &amp; partenariats stratégiques · Gestion de P&amp;L</p></div>
+    <div class="skill-group"><p class="skill-group-title">Marketing &amp; positionnement</p><p>Marketing mix · Segmentation marché &amp; ciblage · Branding &amp; positionnement de l'offre · Sales enablement · Outils d'aide à la vente · Marketing digital · SEO/SEM/GEO · Stratégie de contenu · Parcours client multicanal</p></div>
+    <div class="skill-group"><p class="skill-group-title">Leadership &amp; management</p><p>Management équipes commerciales &amp; marketing (jusqu'à 12 personnes) · Alignement transversal ventes / marketing / produit · Gestion du changement · Coaching équipes commerciales · Reporting direction générale</p></div>
+    <div class="skill-group"><p class="skill-group-title">Secteurs &amp; technologies</p><p>Tech / Deep Tech · Télécoms · e-Mobility · IoT · AI · Publishing B2B · SaaS · B2B international · Scale-up et grands groupes</p></div>
+    <div class="skill-group full"><p class="skill-group-title">Builder augmenté IA — usage professionnel</p><p>Vibe coding — création de MVPs et applications métier · Déploiement stack : GitHub, Vercel, Supabase, ElevenLabs · Cycle complet build → déploiement → debug → régression · Maîtrise outils IA générative (Claude, ChatGPT, Midjourney, Notion AI…) · Référencement génératif (GEO) — optimisation visibilité dans les moteurs IA (ChatGPT, Perplexity, Google AI Overview)</p></div>
+  </div>
+</section>
+
+<section class="cv-section">
+  <h2 class="cv-section-title">Outils &amp; technologies</h2>
+  <div class="tools-flow">
+    <span class="tag r">Salesforce</span><span class="tag r">HubSpot CRM + Marketing Hub</span><span class="tag r">LinkedIn Sales Navigator</span>
+    <span class="tag b">Google Analytics 4</span><span class="tag b">SEMrush</span><span class="tag b">Google Search Console</span><span class="tag b">Hotjar</span>
+    <span class="tag b">GitHub · Vercel · Supabase · ElevenLabs</span><span class="tag b">Claude · ChatGPT · Perplexity</span>
+    <span class="tag">Tableau · Google Data Studio</span><span class="tag">Mailchimp · Brevo</span><span class="tag">WordPress · HubSpot CMS · Yoast SEO</span>
+    <span class="tag">Notion AI · Slack · Asana · Jira</span><span class="tag">Canva · Figma · Adobe Creative Suite</span>
+    <span class="tag">Midjourney · Canva Magic Design</span><span class="tag">Excel / Google Sheets</span><span class="tag">DocuSign · Calendly · Doodle</span>
+  </div>
+</section>
+
+<section class="cv-section">
+  <h2 class="cv-section-title">Langues</h2>
+  <div class="lang-grid">
+    <div><div class="lang-name">Français</div><div class="lang-level">Natif</div><div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div></div>
+    <div><div class="lang-name">Anglais</div><div class="lang-level">Bilingue</div><div class="lang-bar"><div class="lang-fill" style="width:95%"></div></div></div>
+    <div><div class="lang-name">Suédois</div><div class="lang-level">Bilingue</div><div class="lang-bar"><div class="lang-fill" style="width:90%"></div></div></div>
+    <div><div class="lang-name">Allemand</div><div class="lang-level">Professionnel</div><div class="lang-bar"><div class="lang-fill" style="width:58%"></div></div></div>
+  </div>
+</section>
+
+<section class="cv-section">
+  <h2 class="cv-section-title">Formation</h2>
+  <div class="edu-degree">Master 2 en Commerce International — Marketing &amp; Finance</div>
+  <div class="edu-school">Université de Picardie</div>
+  <div class="edu-detail">Mention Très Bien · 1999</div>
+</section>
+
+<section class="cv-section">
+  <h2 class="cv-section-title">Engagements &amp; différenciation</h2>
+  <ul class="engage-list">
+    <li><strong>Membre du Conseil de Développement de Grenoble Alpes Métropole</strong> (2026 – Présent) — transition énergétique et innovation territoriale.</li>
+    <li><strong>Évaluatrice experte :</strong> Vinnova (Agence suédoise de l'Innovation), Commission Européenne (Horizon 2020), GSMA.</li>
+    <li><strong>Adaptabilité sectorielle prouvée :</strong> transition réussie des télécoms à l'e-mobility en moins d'un an, avec résultats concrets (campagne crowdfunding eBikeOS dépassant ses objectifs).</li>
+    <li><strong>Sportive :</strong> Escalade · Vélo de route · Randonnée · Trail.</li>
+  </ul>
+</section>
+
+</div><!-- end .fr-content -->
+
+
+<!-- ════════════════════════════════════════
+     ENGLISH VERSION
+════════════════════════════════════════ -->
+<div class="en-content">
+
+<header class="cv-header">
+  <p class="cv-eyebrow">Sales &amp; Marketing Director — B2B · Tech · International</p>
+  <h1 class="cv-name">Marlène Tissot <em>Desvaux de Marigny</em></h1>
+  <div class="cv-contacts">
+    <span>Grenoble, France</span>
+    <a href="mailto:marlene.tissot.marigny@email.com">marlene.tissot.marigny@email.com</a>
+    <a href="tel:+33775719453">+33 7 75 71 94 53</a>
+    <a href="https://www.linkedin.com/in/marlenedesvauxdemarigny/" target="_blank">LinkedIn</a>
+  </div>
+</header>
+
+<section class="cv-section">
+  <h2 class="cv-section-title">Profile</h2>
+  <p class="cv-profil-text">Sales &amp; Marketing Director with 20+ years of experience in commercial development, GTM strategy and revenue growth across international B2B environments (tech, deep tech, telecoms, e-mobility). Proven ability to lead go-to-market plans end-to-end — market segmentation, target qualification, sales team activation, new customer acquisition. Direct experience founding and running a company (P&amp;L, hiring, portfolio development). "AI-augmented builder" profile: MVP and business application prototyping (vibe coding, GitHub, Vercel, Supabase), fluent with generative AI tools and GEO. Trilingual (FR / EN / SV), strong cross-sector adaptability, based in Grenoble, France.</p>
+  <div class="tags">
+    <span class="tag r">Commercial Development</span>
+    <span class="tag r">Go-to-Market Strategy</span>
+    <span class="tag r">Revenue Growth</span>
+    <span class="tag r">B2B Key Accounts</span>
+    <span class="tag r">P&amp;L Management</span>
+    <span class="tag b">Team Management (12 people)</span>
+    <span class="tag b">Salesforce · HubSpot · GA4</span>
+    <span class="tag b">Branding &amp; Positioning</span>
+    <span class="tag b">Generative AI &amp; GEO</span>
+    <span class="tag">AI-Augmented Builder · Vibe Coding</span>
+    <span class="tag">Entrepreneurial mindset</span>
+  </div>
+</section>
+
+<section class="cv-section">
+  <h2 class="cv-section-title">Professional Experience</h2>
+
+  <div class="job">
+    <div class="job-top">
+      <div><div class="job-title">Marketing Director</div><div class="job-company">eBikeLabs</div></div>
+      <div class="job-dates">Grenoble, France<br>2025 – June 2026</div>
+    </div>
+    <p class="job-context">Deep tech scale-up — eBikeOS motor control software for electric bikes and shared fleets. Member of the Executive Committee.</p>
+    <ul class="job-bullets">
+      <li><strong>Go-to-market plan:</strong> designed and led full GTM strategy, aligning CEO, COO, technical and commercial teams around growth objectives and priority targets (OEMs, motor manufacturers, fleet operators).</li>
+      <li><strong>Segmentation &amp; commercial targeting:</strong> defined ICPs and differentiated value propositions for 3 customer segments; created sales enablement tools and commercial narratives to activate field teams.</li>
+      <li><strong>Product launch &amp; pipeline development:</strong> led eBikeOS launch — crowdfunding campaign exceeding targets, acquisition of strategic partners (Voi, Fifteen, Sonceboz, Doga), measurable growth in customer base.</li>
+      <li><strong>Offer positioning:</strong> full rebrand of identity and corporate website to improve commercial clarity with industrial key accounts and accelerate conversion.</li>
+      <li><strong>Brand awareness &amp; lead generation:</strong> communication strategy generating 30 positive press mentions, growing engagement across all digital channels.</li>
+      <li><strong>Management &amp; reporting:</strong> co-led priorities across technical, commercial and marketing teams; ExCom member — budget arbitration and reporting to CEO.</li>
+    </ul>
+    <div class="tags" style="margin-top:.6rem">
+      <span class="tag r">GTM Strategy</span><span class="tag r">Sales Enablement</span><span class="tag r">Pipeline Generation</span><span class="tag r">Rebranding</span><span class="tag b">P&amp;L · Budget</span><span class="tag b">Team Management (12)</span>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="job-top">
+      <div><div class="job-title">Senior Brand &amp; Tech Strategist</div><div class="job-company">Seventy Agency</div></div>
+      <div class="job-dates">Stockholm, Sweden<br>2022 – 2025</div>
+    </div>
+    <p class="job-context">Brand &amp; business design agency for tech and industry leaders (client portfolio: Ericsson, Atlas Copco, Samsung, Nothing).</p>
+    <ul class="job-bullets">
+      <li><strong>C-level advisory &amp; brand and commercial strategy:</strong> advised Ericsson's executive leadership on brand equity strategy during M&amp;A integration and the rollout of innovative 5G network capabilities.</li>
+      <li><strong>Revenue development:</strong> identified and structured commercial and marketing positioning opportunities; post-M&amp;A brand architecture to generate new revenue streams on new target segments.</li>
+      <li><strong>Account management &amp; performance:</strong> maintained and grew key account revenue in a challenging economic climate; managed significant budgets, led project teams (8 people).</li>
+      <li><strong>Business representation:</strong> hybrid demos at Mobile World Congress with strong prospect conversion rate; collaboration with international teams (USA, Sweden).</li>
+    </ul>
+    <div class="tags" style="margin-top:.6rem">
+      <span class="tag r">B2B Commercial Strategy</span><span class="tag r">Key Account Management</span><span class="tag r">M&amp;A Integration</span><span class="tag b">Team Management (8)</span>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="job-top">
+      <div><div class="job-title">Founder &amp; CEO</div><div class="job-company">Daring Exponentials AB</div></div>
+      <div class="job-dates">Stockholm, Sweden<br>2019 – 2025</div>
+    </div>
+    <p class="job-context">Niche consultancy specialising in talent inclusion and organisational performance.</p>
+    <ul class="job-bullets">
+      <li><strong>Company creation &amp; development:</strong> founded and grew an independent structure — prospecting, client acquisition, offer development, full P&amp;L management.</li>
+      <li><strong>Portfolio development:</strong> built a network of B2B clients and partners; advised executives on organisational design and leadership.</li>
+      <li><strong>Leadership &amp; management:</strong> recruited and led a specialist team; coaching and professional development.</li>
+    </ul>
+    <div class="tags" style="margin-top:.6rem">
+      <span class="tag r">Company Creation</span><span class="tag r">P&amp;L Management</span><span class="tag r">Portfolio Development</span><span class="tag b">Leadership</span>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="job-top">
+      <div><div class="job-title">Opinion &amp; Feature Editor / Head of AI &amp; Data</div><div class="job-company">Realtid</div></div>
+      <div class="job-dates">Stockholm, Sweden<br>Oct. 2021 – June 2022</div>
+    </div>
+    <p class="job-context">Tech &amp; business media outlet.</p>
+    <ul class="job-bullets">
+      <li><strong>Transformation &amp; revenue growth:</strong> led data-driven transition — KPI modelling, reporting automation, +20% revenue growth through refined commercial targeting.</li>
+      <li><strong>Commercial development:</strong> created new editorial formats (data-driven newsletters, interactive reports) to generate sponsorship and partner revenue opportunities.</li>
+    </ul>
+    <div class="tags" style="margin-top:.6rem">
+      <span class="tag r">Revenue Growth +20%</span><span class="tag b">Data-driven Strategy</span>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="job-top">
+      <div><div class="job-title">Digital Communications &amp; Content Manager</div><div class="job-company">Invest Stockholm</div></div>
+      <div class="job-dates">Stockholm, Sweden<br>2017 – 2019</div>
+    </div>
+    <p class="job-context">Stockholm's economic development agency — tech, innovation, FoodTech, Life Science.</p>
+    <ul class="job-bullets">
+      <li><strong>International business development:</strong> prospecting and acquiring investors and startups; multichannel lead generation campaigns.</li>
+      <li><strong>B2B events:</strong> organised sold-out events in Sweden and the USA (SXSW Austin, FoodTech New York).</li>
+      <li><strong>Agency &amp; partnership management:</strong> managed external agencies; coordinated with startups, incubators and local institutions.</li>
+    </ul>
+    <div class="tags" style="margin-top:.6rem">
+      <span class="tag r">Lead Generation</span><span class="tag r">Business Development</span><span class="tag b">HubSpot · GA4</span>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="job-top">
+      <div><div class="job-title">Fractional CMO / Head of Growth / Editor</div><div class="job-company">Freelance — Multiple mandates</div></div>
+      <div class="job-dates">Sweden · France · UK · USA<br>2002 – 2022</div>
+    </div>
+    <p class="job-context">Outsourced commercial and marketing leadership — clients: Vinci, eBikeLabs, GSMA, RCR Wireless, Sköna.</p>
+    <ul class="job-bullets">
+      <li><strong>Outsourced commercial leadership (fractional CMO):</strong> defined growth plans, deployed GTM strategies, created commercial tools and generated pipeline for B2B clients.</li>
+      <li><strong>Performance campaigns:</strong> data-driven strategies (SEO, SEM, automation) focused on acquisition and conversion; brand storytelling and demand generation.</li>
+      <li><strong>Market intelligence:</strong> GTM research, competitive benchmarking, identification of new sector opportunities.</li>
+    </ul>
+    <div class="tags" style="margin-top:.6rem">
+      <span class="tag r">GTM Strategy</span><span class="tag r">Demand Generation</span><span class="tag r">Fractional CMO</span><span class="tag b">SEO / SEM · HubSpot · SEMrush</span>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="job-top">
+      <div><div class="job-title">Editor-in-Chief &amp; Product Lead</div><div class="job-company">Mobilbusiness / Mobil</div></div>
+      <div class="job-dates">Stockholm, Sweden<br>2012 – 2015</div>
+    </div>
+    <p class="job-context">Specialised B2B &amp; B2C telecoms media.</p>
+    <ul class="job-bullets">
+      <li><strong>Profit centre management:</strong> P&amp;L ownership, advertiser revenue growth, revenue stream diversification, budget management.</li>
+      <li><strong>Team management:</strong> led a team of 10 (employees and freelancers); multichannel strategy, digital product transformation.</li>
+      <li><strong>Commercial events:</strong> organised sold-out events generating partner revenue.</li>
+    </ul>
+    <div class="tags" style="margin-top:.6rem">
+      <span class="tag r">P&amp;L Management</span><span class="tag r">Revenue Growth</span><span class="tag b">Team Management (10)</span>
+    </div>
+  </div>
+
+  <div class="job">
+    <div class="job-top">
+      <div><div class="job-title">Senior Editor</div><div class="job-company">Telekom Online</div></div>
+      <div class="job-dates">Germany<br>2007 – 2011</div>
+    </div>
+    <p class="job-context">B2B telecoms &amp; tech media, Deutsche Telekom Group.</p>
+    <ul class="job-bullets">
+      <li>European telecoms and tech market analysis; high-value analytical content for executives and decision-makers.</li>
+      <li>Collaboration with commercial teams on editorial formats driving readership and partner revenue.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-top">
+      <div><div class="job-title">Senior Editor</div><div class="job-company">emap</div></div>
+      <div class="job-dates">London, United Kingdom<br>2001 – 2002</div>
+    </div>
+    <p class="job-context">B2B media group specialising in telecoms &amp; tech.</p>
+    <ul class="job-bullets">
+      <li>Global telecoms &amp; tech market analysis; competitive benchmarking; analytical content supporting commercial partnerships.</li>
+      <li>Close collaboration with sales teams on high-value editorial formats (special reports, exclusive analyses).</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-top">
+      <div><div class="job-title">Associate Research Analyst</div><div class="job-company">Gartner</div></div>
+      <div class="job-dates">United Kingdom<br>1999 – 2001</div>
+    </div>
+    <p class="job-context">Research and advisory firm — telecoms practice.</p>
+    <ul class="job-bullets">
+      <li>Strategic market analysis (telecoms, VoIP) to inform commercial recommendations for Gartner clients.</li>
+      <li>Technology monitoring, competitive benchmarking, published reports and C-level presentations.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-top">
+      <div><div class="job-title">Marketing &amp; International Trade Intern</div><div class="job-company">Federal Mogul</div></div>
+      <div class="job-dates">UK · Germany<br>1998 – 1999</div>
+    </div>
+    <p class="job-context">International automotive supplier.</p>
+    <ul class="job-bullets">
+      <li>Immersion in marketing and commercial operations within the international automotive industry.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="cv-section">
+  <h2 class="cv-section-title">Key Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-group"><p class="skill-group-title">Strategy &amp; Sales</p><p>Go-to-market strategy · Revenue growth · Customer portfolio development · Prospecting &amp; lead qualification · B2B key account management · Strategic negotiations &amp; partnerships · P&amp;L management</p></div>
+    <div class="skill-group"><p class="skill-group-title">Marketing &amp; Positioning</p><p>Marketing mix · Market segmentation &amp; targeting · Branding &amp; offer positioning · Sales enablement · Digital marketing · SEO/SEM/GEO · Content strategy · Multichannel customer journey</p></div>
+    <div class="skill-group"><p class="skill-group-title">Leadership &amp; Management</p><p>Commercial &amp; marketing team management (up to 12 people) · Cross-functional alignment (sales / marketing / product) · Change management · Sales team coaching · Executive reporting</p></div>
+    <div class="skill-group"><p class="skill-group-title">Sectors &amp; Technologies</p><p>Tech / Deep Tech · Telecoms · e-Mobility · IoT · AI · B2B Publishing · SaaS · International B2B · Scale-ups and enterprise</p></div>
+    <div class="skill-group full"><p class="skill-group-title">AI-Augmented Builder — professional use</p><p>Vibe coding — MVP and business application prototyping · Deployment stack: GitHub, Vercel, Supabase, ElevenLabs · Full cycle: build → deploy → debug → regression · Generative AI tools (Claude, ChatGPT, Midjourney, Notion AI…) · GEO (Generative Engine Optimization) — brand visibility in AI search engines (ChatGPT, Perplexity, Google AI Overview)</p></div>
+  </div>
+</section>
+
+<section class="cv-section">
+  <h2 class="cv-section-title">Tools &amp; Technologies</h2>
+  <div class="tools-flow">
+    <span class="tag r">Salesforce</span><span class="tag r">HubSpot CRM + Marketing Hub</span><span class="tag r">LinkedIn Sales Navigator</span>
+    <span class="tag b">Google Analytics 4</span><span class="tag b">SEMrush</span><span class="tag b">Google Search Console</span><span class="tag b">Hotjar</span>
+    <span class="tag b">GitHub · Vercel · Supabase · ElevenLabs</span><span class="tag b">Claude · ChatGPT · Perplexity</span>
+    <span class="tag">Tableau · Google Data Studio</span><span class="tag">Mailchimp · Brevo</span><span class="tag">WordPress · HubSpot CMS · Yoast SEO</span>
+    <span class="tag">Notion AI · Slack · Asana · Jira</span><span class="tag">Canva · Figma · Adobe Creative Suite</span>
+    <span class="tag">Midjourney · Canva Magic Design</span><span class="tag">Excel / Google Sheets</span><span class="tag">DocuSign · Calendly</span>
+  </div>
+</section>
+
+<section class="cv-section">
+  <h2 class="cv-section-title">Languages</h2>
+  <div class="lang-grid">
+    <div><div class="lang-name">French</div><div class="lang-level">Native</div><div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div></div>
+    <div><div class="lang-name">English</div><div class="lang-level">Bilingual</div><div class="lang-bar"><div class="lang-fill" style="width:95%"></div></div></div>
+    <div><div class="lang-name">Swedish</div><div class="lang-level">Bilingual</div><div class="lang-bar"><div class="lang-fill" style="width:90%"></div></div></div>
+    <div><div class="lang-name">German</div><div class="lang-level">Professional</div><div class="lang-bar"><div class="lang-fill" style="width:58%"></div></div></div>
+  </div>
+</section>
+
+<section class="cv-section">
+  <h2 class="cv-section-title">Education</h2>
+  <div class="edu-degree">Master's degree in International Business — Marketing &amp; Finance</div>
+  <div class="edu-school">Université de Picardie, France</div>
+  <div class="edu-detail">Distinction (mention Très Bien) · 1999</div>
+</section>
+
+<section class="cv-section">
+  <h2 class="cv-section-title">Commitments &amp; Differentiators</h2>
+  <ul class="engage-list">
+    <li><strong>Member of the Development Council of Grenoble Alpes Métropole</strong> (2026 – present) — energy transition and territorial innovation.</li>
+    <li><strong>Expert evaluator:</strong> Vinnova (Swedish Innovation Agency), European Commission (Horizon 2020), GSMA.</li>
+    <li><strong>Proven cross-sector adaptability:</strong> successful transition from telecoms to e-mobility in under one year, with tangible results (eBikeOS crowdfunding campaign exceeding targets).</li>
+    <li><strong>Sports:</strong> Rock climbing · Road cycling · Hiking · Trail running.</li>
+  </ul>
+</section>
+
+</div><!-- end .en-content -->
+
+</div><!-- end .page -->
+
+<script>
+function setLang(lang) {
+  document.querySelector('.fr-content').classList.toggle('active', lang === 'fr');
+  document.querySelector('.en-content').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.documentElement.lang = lang;
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
